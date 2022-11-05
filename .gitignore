@@ -122,6 +122,7 @@ X70-tools/
 *checkpoints/
 *ckpt/
 scale_map_net/*.jpg
+visdrone_val_output/*
 
 # Pytorch
 *.pth
