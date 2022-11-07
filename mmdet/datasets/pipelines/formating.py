@@ -574,3 +574,18 @@ class WrapFieldsToLists:
 
     def __repr__(self):
         return f'{self.__class__.__name__}()'
+
+
+@PIPELINES.register_module()
+class Pick:
+    """
+    pick what you want
+    """
+
+    def __init__(self,keys):
+        self.keys = keys
+    def __call__(self, results):
+        data = {}
+        for key in self.keys:
+            data[key] = results[key]
+        return data

@@ -4,7 +4,7 @@ from .auto_augment import (AutoAugment, BrightnessTransform, ColorTransform,
                            Translate)
 from .compose import Compose
 from .formating import (Collect, DefaultFormatBundle, ImageToTensor,
-                        ToDataContainer, ToTensor, Transpose, to_tensor, DefaultFormatBundleWithDesityMap)
+                        ToDataContainer, ToTensor, Transpose, to_tensor, DefaultFormatBundleWithDesityMap, Pick)
 from .instaboost import InstaBoost
 from .loading import (LoadAnnotations, LoadImageFromFile, LoadImageFromWebcam,
                       LoadMultiChannelImageFromFiles, LoadProposals, LoadScaleMap, LoadScaleMapTest, LoadQualityMap, LoadQualityMapTest)
@@ -27,5 +27,5 @@ __all__ = [
     'Rotate', 'ColorTransform', 'EqualizeTransform', 'BrightnessTransform',
     'ContrastTransform', 'Translate', 'RandomShift', 'Mosaic', 'MixUp',
     'RandomAffine', 'YOLOXHSVRandomAug', 'ResizeWithDensityMap', 'RandomFlipWithDensityMap', 'PadWithDensityMap', 'AlbuAdditional', 
-    'LoadScaleMap', 'LoadScaleMapTest', 'LoadQualityMap', 'LoadQualityMapTest'
+    'LoadScaleMap', 'LoadScaleMapTest', 'LoadQualityMap', 'LoadQualityMapTest','Pick'
 ]
