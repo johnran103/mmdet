@@ -78,7 +78,7 @@ if __name__=="__main__":
     args = parse_args()
     cfg = Config.fromfile(args.config)
 
-    device = torch.device('cuda:0')
+    device = torch.device('cuda:1')
 
     psudo_label_generator = GetPsudoSegLabel()
 
@@ -100,13 +100,14 @@ if __name__=="__main__":
         pin_memory=False)
 
     model=OneModel(cfg.model).to(device)
-    crit = calc_loss()
-    optimizer = torch.optim.SGD(model.parameters(), lr=cfg.lr_rate, momentum=0.95) #SGDM
-
+    optimizer = torch.optim.SGD(model.parameters(), lr=cfg.model.lr_rate, momentum=0.95) #SGDM
+    scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, [8,10], gamma=0.1)
     epoch=12 # 1x
 
-    for _ in range(epoch):
-        print(f'start >>>>>>>>>>>>>>>>>>>> {_} epoch <<<<<<<<<<<<<<<<')
+    model.train()
+    for _epoch in range(epoch):
+        print(f'start >>>>>>>>>>>>>>>>>>>> {_epoch} epoch <<<<<<<<<<<<<<<<')
+        epoch_loss = []
         for i, x in enumerate(data_loader):
             imgs = x['img'].data[0].to(device)
             img_h, img_w = imgs.size()[-2:]
@@ -117,14 +118,22 @@ if __name__=="__main__":
             seg_label=torch.cat(seg_label, dim=0)
             seg_label = seg_label.to(device)
             # visualize(imgs[0].cpu(), seg_label[0].cpu())
-            # print(imgs.size())
-            # print(seg_label.size())
 
             _output = model(imgs)
-            loss = crit(_output, seg_label)
+            loss = calc_loss(_output.permute(0,2,3,1), seg_label)
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
 
+            epoch_loss.append(loss.item())
             if i % 200 == 0:
                 print(f'>>>>iter {i} loss {loss.item()}')
+
+        if (_epoch + 1) % 4 == 0:
+            torch.save(model.state_dict(),'../ckpt/checkpoints_seg/epoch_'+str(_epoch)+".pth")
+        
+        print(f'>>>>>>>>>>>>>>>>>>>> epoch {_epoch} loss {sum(epoch_loss)/len(epoch_loss)} <<<<<<<<<<<<<<<<')
+        scheduler.step()
 
 
 

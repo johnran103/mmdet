@@ -86,6 +86,7 @@ class OneModel(nn.Module):
         # Base Learner
         self.encoder = nn.Sequential(self.layer0, self.layer1, self.layer2, self.layer3, self.layer4)
         fea_dim = 512 if self.vgg else 2048
+        #fea_dim = 512 if self.vgg else 1024
         bins=(1, 2, 3, 6)
         self.ppm = PPM(fea_dim, int(fea_dim/len(bins)), bins)
         self.cls = nn.Sequential(
@@ -95,7 +96,7 @@ class OneModel(nn.Module):
             nn.Dropout2d(p=0.1),
             nn.Conv2d(512, self.classes, kernel_size=1))
 
-    def forward(self, x, y):
+    def forward(self, x):
         x_size = x.size()
         h = int((x_size[2] - 1) / 8 * self.zoom_factor + 1)
         w = int((x_size[3] - 1) / 8 * self.zoom_factor + 1)    # 473
@@ -107,8 +108,4 @@ class OneModel(nn.Module):
         if self.zoom_factor != 1:
             x = F.interpolate(x, size=(h, w), mode='bilinear', align_corners=True)
 
-        if self.training:
-            main_loss = self.criterion(x, y.long())
-            return x.max(1)[1], main_loss
-        else:
-            return 
+        return x
