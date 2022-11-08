@@ -32,7 +32,8 @@ class attention1d(nn.Module):
         self.fc1 = nn.Conv2d(in_planes, hidden_planes, 1, bias=False)
         # self.bn = nn.BatchNorm2d(hidden_planes)
         self.fc2 = nn.Conv2d(hidden_planes, K, 1, bias=True)
-        self.temperature = temperature
+        #self.temperature = temperature bug when test
+        self.register_buffer('temperature', temperature)
         self.K = K
         if init_weight:
             self._initialize_weights()
