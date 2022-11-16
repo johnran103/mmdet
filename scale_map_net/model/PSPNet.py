@@ -50,7 +50,7 @@ class OneModel(nn.Module):
         self.zoom_factor = args.zoom_factor
         self.vgg = args.vgg
 
-        self.pretrained = True
+        self.pretrained = args.pretrained
         self.classes = args.num_classes
         
         assert self.layers in [50, 101, 152]

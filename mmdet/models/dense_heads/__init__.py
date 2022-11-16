@@ -46,6 +46,8 @@ from .dy_mp_head_1_shortcut import DYMPHead1_sc
 from .dy_mp_head_1_gt import DYMPHead1GT
 from .dy_mp_head_1_gt_quality import DYMPHead1GT_Q
 from .mp_head_longtail import MPHeadT
+from .dy_mp_head_seg1 import DYMPHeadSeg1
+from .dy_mp_head_seg2 import DYMPHeadSeg2
 
 __all__ = [
     'AnchorFreeHead', 'AnchorHead', 'GuidedAnchorHead', 'FeatureAdaption',
@@ -58,5 +60,6 @@ __all__ = [
     'CascadeRPNHead', 'EmbeddingRPNHead', 'LDHead', 'CascadeRPNHead',
     'AutoAssignHead', 'DETRHead', 'YOLOFHead', 'DeformableDETRHead',
     'SOLOHead', 'DecoupledSOLOHead', 'CenterNetHead', 'YOLOXHead',
-    'DecoupledSOLOLightHead', 'LADHead', 'MPHead', 'DensityHead', 'DYMPHead', 'DYMPHeadSW','DYMPHead1','DYMPHead1_sc','DYMPHead1GT_Q','MPHeadT'
+    'DecoupledSOLOLightHead', 'LADHead', 'MPHead', 'DensityHead', 'DYMPHead', 'DYMPHeadSW','DYMPHead1','DYMPHead1_sc','DYMPHead1GT_Q','MPHeadT','DYMPHeadSeg1'
+    ,'DYMPHeadSeg2'
 ]

@@ -45,6 +45,7 @@ from .hrgfl4x import HRGFL4X
 from .dympdet import DyMPDet
 from .dympdet_gt import DyMPDetGT
 from .dympdet_gt_quality import DyMPDetGT_Q
+from .dympdet_seg1 import DyMPDetSeg1
 
 __all__ = [
     'ATSS', 'BaseDetector', 'SingleStageDetector', 'TwoStageDetector', 'RPN',
@@ -54,5 +55,5 @@ __all__ = [
     'NASFCOS', 'PointRend', 'GFL', 'CornerNet', 'PAA', 'YOLOV3', 'YOLACT',
     'VFNet', 'DETR', 'TridentFasterRCNN', 'SparseRCNN', 'SCNet', 'SOLO',
     'DeformableDETR', 'AutoAssign', 'YOLOF', 'CenterNet', 'YOLOX','HRGFL4X',
-    'TwoStagePanopticSegmentor', 'PanopticFPN', 'QueryInst', 'LAD', 'DDSS','DyMPDet','DyMPDetGT_Q'
+    'TwoStagePanopticSegmentor', 'PanopticFPN', 'QueryInst', 'LAD', 'DDSS','DyMPDet','DyMPDetGT_Q','DyMPDetSeg1'
 ]
